@@ -1,0 +1,162 @@
+grammar org.sprat.ecosystem.Ecosystem with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+generate ecosystem "http://www.sprat.org/ecosystem/Ecosystem"
+
+EcosystemModel:
+	{EcosystemModel} entities+=Entity*;
+
+Entity:
+	type=EntityType (name=ID)? '{'
+		attributes+=Attribute*
+	closingBrace='}'
+;
+
+enum EntityType:
+	SPECIES='Species' | ECOSYSTEM='Ecosystem' | INPUT='Input' | OUTPUT='Output'
+;
+
+Attribute:
+	  PropertyAttribute
+	| RecordAttribute
+;
+
+RecordAttribute:
+	'record' description=STRING '@' recModifier=(RecordModifierFunction | RecordModifierIdentifier) ':' 
+	expression=Expression
+;
+RecordModifierIdentifier:
+	value=ID
+;
+RecordModifierFunction:
+	name=ID '(' argument=Expression closingParenthesis=')'
+;
+
+
+PropertyAttribute:
+	name=ID ':' attribute=PropertyAttributeValue ('@' modifier=PropertyAttributeValue)?
+;
+PropertyAttributeValue:
+	{PropertyAttributeValue} value=(Expression | StringLiteral)
+;
+StringLiteral:
+	{StringLiteral} value=STRING
+;
+
+
+
+
+
+
+
+
+RangeExpression returns Expression:
+	  Expression ({RangeExpressionNode.from=current} op='~' (to=Expression)?)?
+	| {RangeExpressionNode} op='~' (to=Expression)?
+;
+
+Expression:
+	TernaryConditionalExpression
+;
+
+// TODO: Korrekt?
+TernaryConditionalExpression returns Expression:
+	OrExpression ({TernaryConditionalExpressionNode.condition=current} op='?' ifTrue=TernaryConditionalExpression ':' ifFalse=TernaryConditionalExpression)?
+;
+
+OrExpression returns Expression:
+	AndExpression ({BinaryBooleanExpressionNode.left=current} op=('||') right=AndExpression)*
+;
+
+AndExpression returns Expression:
+	EqualExpression ({BinaryBooleanExpressionNode.left=current} op=('&&') right=EqualExpression)*
+;
+
+EqualExpression returns Expression:
+	CompareExpression ({BinaryBooleanExpressionNode.left=current} op=('=='|'!=') right=CompareExpression)*
+;
+
+CompareExpression returns Expression:
+	UnitExpression ({BinaryBooleanExpressionNode.left=current} op=('<'|'>'|'<='|'>=') right=UnitExpression)*
+;
+
+UnitExpression returns Expression:
+	AddOrSubExpression ({UnitExpressionNode.child=current} unit=UNIT)?
+;
+
+AddOrSubExpression returns Expression:
+	MulOrDivExpression ({BinaryArithmeticExpressionNode.left=current} op=('+'|'-') right=MulOrDivExpression)*
+;
+
+MulOrDivExpression returns Expression:
+	PrefixedExpression ({BinaryArithmeticExpressionNode.left=current} op=('*'|'/') right=PrefixedExpression)*
+;
+
+PrefixedExpression returns Expression:
+	  {UnaryBooleanExpressionNode} op='!' child=AtomicExpression
+	| {UnaryArithmeticExpressionNode} op=('+'|'-') child=AtomicExpression
+	| AtomicExpression
+;
+
+AtomicExpression returns Expression:
+	  '(' Expression ')'
+	| MathFunction
+	| RecordFunction
+	| Identifier
+	| IntegerLiteral
+	| RealLiteral
+;
+
+MathFunction returns Expression:
+	{MathFunction} name=ID '(' argument=Expression closingParenthesis=')'
+;
+
+//FunctionOrIdentifier returns Expression:
+//	Function | Identifier
+//;
+
+RecordFunction returns Expression:
+	{RecordFunction} name=ID '(' (arguments+=RecordFunctionArgument)? (',' arguments+=RecordFunctionArgument)* closingParenthesis=')'
+;
+
+RecordFunctionArgument returns Expression:
+	{RecordFunctionArgument} name=ID '=' argument=RangeExpression
+;
+
+
+
+IntegerLiteral returns Expression:
+	{IntegerLiteral} value=INT
+;
+
+RealLiteral returns Expression:
+	{RealLiteral} value=REAL
+;
+
+Identifier returns Expression:
+	{Identifier} name=ID
+;
+
+
+
+
+terminal REAL returns ecore::EDouble:
+	  (INT '.' INT)
+	| ('.' INT)
+	| (('.')? INT ('e'|'E') ('+'|'-')? INT)
+	| (INT '.' INT ('e'|'E') ('+'|'-')? INT)
+;
+
+terminal UNIT: 
+	'[' ('a'..'z'|'A'..'Z'|' '|'/'|'*'|'^'|'-'|'°'|'1'..'9')* ']'
+;
+
+terminal STRING:
+	'"' ( ('\\"') | !('\\'|'"') )* '"'
+;
+
+terminal ID:
+	('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+;
+

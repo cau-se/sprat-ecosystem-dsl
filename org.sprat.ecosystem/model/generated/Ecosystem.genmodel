@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.sprat.ecosystem/src-gen" editDirectory="/org.sprat.ecosystem.edit/src"
+    editorDirectory="/org.sprat.ecosystem.editor/src" modelPluginID="org.sprat.ecosystem"
+    forceOverwrite="true" modelName="Ecosystem" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.sprat.ecosystem.edit"
+    editorPluginID="org.sprat.ecosystem.editor" runtimeVersion="2.11">
+  <genPackages prefix="Ecosystem" basePackage="org.sprat.ecosystem" disposableProviderFactory="true"
+      fileExtensions="ecosystem" ecorePackage="Ecosystem.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Ecosystem.ecore#//EntityType">
+      <genEnumLiterals ecoreEnumLiteral="Ecosystem.ecore#//EntityType/SPECIES"/>
+      <genEnumLiterals ecoreEnumLiteral="Ecosystem.ecore#//EntityType/ECOSYSTEM"/>
+      <genEnumLiterals ecoreEnumLiteral="Ecosystem.ecore#//EntityType/INPUT"/>
+      <genEnumLiterals ecoreEnumLiteral="Ecosystem.ecore#//EntityType/OUTPUT"/>
+    </genEnums>
+    <genClasses ecoreClass="Ecosystem.ecore#//EcosystemModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//EcosystemModel/entities"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//Entity/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//Entity/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//Entity/attributes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//Entity/closingBrace"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//Attribute"/>
+    <genClasses ecoreClass="Ecosystem.ecore#//RecordAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RecordAttribute/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//RecordAttribute/recModifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//RecordAttribute/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//RecordModifierIdentifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RecordModifierIdentifier/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//RecordModifierFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RecordModifierFunction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//RecordModifierFunction/argument"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RecordModifierFunction/closingParenthesis"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//PropertyAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//PropertyAttribute/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//PropertyAttribute/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//PropertyAttribute/modifier"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//PropertyAttributeValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//PropertyAttributeValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//Expression"/>
+    <genClasses ecoreClass="Ecosystem.ecore#//RangeExpressionNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//RangeExpressionNode/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RangeExpressionNode/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//RangeExpressionNode/to"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//TernaryConditionalExpressionNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//TernaryConditionalExpressionNode/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//TernaryConditionalExpressionNode/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//TernaryConditionalExpressionNode/ifTrue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//TernaryConditionalExpressionNode/ifFalse"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//BinaryBooleanExpressionNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//BinaryBooleanExpressionNode/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//BinaryBooleanExpressionNode/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//BinaryBooleanExpressionNode/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//UnitExpressionNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//UnitExpressionNode/child"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//UnitExpressionNode/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//BinaryArithmeticExpressionNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//BinaryArithmeticExpressionNode/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//BinaryArithmeticExpressionNode/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//BinaryArithmeticExpressionNode/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//UnaryBooleanExpressionNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//UnaryBooleanExpressionNode/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//UnaryBooleanExpressionNode/child"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//UnaryArithmeticExpressionNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//UnaryArithmeticExpressionNode/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//UnaryArithmeticExpressionNode/child"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//MathFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//MathFunction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//MathFunction/argument"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//MathFunction/closingParenthesis"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//RecordFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RecordFunction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//RecordFunction/arguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RecordFunction/closingParenthesis"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//RecordFunctionArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RecordFunctionArgument/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecosystem.ecore#//RecordFunctionArgument/argument"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//IntegerLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Ecosystem.ecore#//Identifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecosystem.ecore#//Identifier/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
